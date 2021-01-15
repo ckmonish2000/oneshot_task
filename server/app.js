@@ -3,7 +3,7 @@ require("dotenv").config({path: __dirname + '/.env'})
 const app=require("express")();
 const bodyParser=require("body-parser");
 const mongoose=require("mongoose")
-
+const College=require("./routers/college")
 
 // variables
 let PORT=process.env.PORT || 5000;
@@ -11,6 +11,10 @@ let PORT=process.env.PORT || 5000;
 // middlewares
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
+
+
+// routes
+app.use("/college",College)
 
 
 
