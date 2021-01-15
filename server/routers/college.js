@@ -54,14 +54,14 @@ router.get("/getByid",(req,res)=>{
     CollegeModel.find({_id:req.body._id})
     .then(data=>{
        dta["main"]=data;
+
         // gets similar college
+        
         CollegeModel.find({city:data[0].city,courses:data[0].courses,_id:{$ne:req.body._id}})
         .then(val=>{
             dta["similar"]=val;
             res.status(200).json(dta)
-        })
-    }
-        )
+        })})
     .catch(err=>res.json(err))
 })
 
