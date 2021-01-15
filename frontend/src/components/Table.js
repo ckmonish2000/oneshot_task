@@ -1,18 +1,35 @@
 import React from 'react'
 import {  Table, Tag, Space  } from "antd"
-
+import {TableCard} from "./styles"
 
 export default function CollegeTable({data}) {
     const { Column, ColumnGroup } = Table;
+
+    // Table Heading
+    const TableHead=()=><h1 style={{textAlign:"left"}}>List Of Colleges</h1>
+
+    // Courses Tag
+    let Tager=tags=>(
+          <>
+          {
+          tags.map(tag => (
+            <Tag color="blue" key={tag}>
+              {tag}
+            </Tag>
+          ))
+          }
+        </>
+      )
+
     return (
-        <div>
+    <div style={TableCard} >
             
-   <Table dataSource={data} style={{margin:"50pt",boxShadow: "3px 3px 5px 6px #ccc",borderRadius:"7pt",padding:"5pt"}} 
-    title={()=><h1 style={{textAlign:"left"}}>List Of Colleges</h1>}
+   <Table dataSource={data} 
+    title={TableHead}
     pagination={{pageSize:3}}
-   loading={data.length===0?true:false}> 
-   
-   <Column title="College Name" dataIndex="name"/>
+    loading={data.length===0?true:false}> 
+      <Column title="College ID" dataIndex="_id"/>
+      <Column title="College Name" dataIndex="name"/>
       <Column title="Year founded" dataIndex="yearFounded"/>
       <Column title="Student Strength" dataIndex="No_Of_Students" />
       <Column title="Country" dataIndex="country" />
@@ -22,15 +39,7 @@ export default function CollegeTable({data}) {
       title="Courses Offered"
       dataIndex="courses"
       key="tags"
-      render={tags => (
-        <>
-          {tags.map(tag => (
-            <Tag color="blue" key={tag}>
-              {tag}
-            </Tag>
-          ))}
-        </>
-      )}
+      render={Tager}
     />
      
   </Table>
