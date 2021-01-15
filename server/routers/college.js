@@ -1,6 +1,7 @@
 const express=require("express");
 let router=express.Router();
-let CollegeModel=require("../model/Model")
+let CollegeModel=require("../model/Model");
+const { route } = require("./student");
 
 
 
@@ -10,11 +11,11 @@ let CollegeModel=require("../model/Model")
 router.post("/createcollege",(req,res)=>{
     let body=req.body;
     let create=new CollegeModel({
-        name:body.college_name,
+        name:body.college_name.toLowerCase(),
         yearFounded:body.date,
-        city:body.city,
-        state:body.state,
-        country:body.country,
+        city:body.city.toLowerCase(),
+        state:body.state.toLowerCase(),
+        country:body.country.toLowerCase(),
         No_Of_Students:body.No_Of_Students,
         courses:body.courses
     })
@@ -31,6 +32,30 @@ router.get("/",(req,res)=>{
     .then(data=>res.status(200).json(data))
     .catch(err=>res.status(200).json(err))
 })
+
+router.get("/collegefrequency",(req,res)=>{
+    let count=[]
+    let state=[]
+    CollegeModel.find().distinct('state', function(error, data) {
+       if(!error){
+        for(var i=0;i<data.length;i++){
+          state.push(data[i])
+          CollegeModel.find({state:data[i]})
+          .then(val=>{
+             count.push(val.length)
+             if(count.length!==0 && state.length!==0 && count.length==state.length){
+                 res.json({states:state,count:count})
+             }
+          })
+          
+           
+        }
+       
+       }
+    });
+})
+
+
 
 router.get("/getByname",(req,res)=>{
     let dta={}
