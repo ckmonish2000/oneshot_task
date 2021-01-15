@@ -19,7 +19,12 @@ router.post("/createstudent",(req,res)=>{
     .catch(err=>{res.json(err)})
     })
 
-
+//get 
+router.get("/",(req,res)=>{
+   StudentModel.find({})
+    .then(data=>res.status(200).json(data))
+    .catch(err=>res.status(200).json(err))
+})
 
 
 
