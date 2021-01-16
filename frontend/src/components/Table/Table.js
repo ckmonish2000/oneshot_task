@@ -31,7 +31,6 @@ export default function CollegeTable({data}) {
     loading={data.length===0?true:false}> 
       <Column title="College ID" dataIndex="_id"/>
       <Column title="College Name" dataIndex="name"/>
-      <Column title="Year founded" dataIndex="yearFounded"/>
       <Column title="Student Strength" dataIndex="No_Of_Students" />
       <Column title="Country" dataIndex="country" />
       <Column title="State" dataIndex="state" />
