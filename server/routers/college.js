@@ -33,29 +33,6 @@ router.get("/",(req,res)=>{
     .catch(err=>res.status(200).json(err))
 })
 
-router.get("/collegefrequency",(req,res)=>{
-    let count=[]
-    let state=[]
-    CollegeModel.find().distinct('state', function(error, data) {
-       if(!error){
-        for(var i=0;i<data.length;i++){
-          state.push(data[i])
-          CollegeModel.find({state:data[i]})
-          .then(val=>{
-             count.push(val.length)
-             if(count.length!==0 && state.length!==0 && count.length==state.length){
-                 res.json({states:state,count:count})
-             }
-          })
-          
-           
-        }
-       
-       }
-    });
-})
-
-
 
 router.get("/getByname",(req,res)=>{
     let dta={}

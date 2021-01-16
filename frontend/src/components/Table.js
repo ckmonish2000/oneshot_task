@@ -1,6 +1,7 @@
 import React from 'react'
 import {  Table, Tag, Space  } from "antd"
 import {TableCard} from "./styles"
+import QueueAnim from 'rc-queue-anim';
 
 export default function CollegeTable({data}) {
     const { Column, ColumnGroup } = Table;
@@ -41,7 +42,7 @@ export default function CollegeTable({data}) {
       key="tags"
       render={Tager}
     />
-     
+
   </Table>
         </div>
     )
