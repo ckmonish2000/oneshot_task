@@ -38,29 +38,58 @@ function App(props) {
  
   }, [])
 
+  // states and handlers
   const [visible, setvisible] = useState(false)
   const onClose=()=>setvisible(false)
   const open=()=>setvisible(true)
+
+
+  // components
+  const Header=()=>{
+    return (    
+  <div style={{display:"flex",margin:10}}>
+  <button onClick={open} className="btn"style={{background:"none",border:"none",outline:"none"}}>
+  <img src="https://img.icons8.com/cotton/2x/menu.png" style={{width:"30pt",margin:"10pt"}}/>
+  </button>
+  <h1 style={{margin:"10pt",opacity:0.9}}>DashBoard</h1>
+  </div>)}
+
+
+
+    const Drawerlist=({onClick,title})=>{
+    return(
+      <div style={{cursor:"pointer"}} >
+      <a onClick={onClick} style={{fontSize:"12pt"}}>{title}</a>
+      </div>
+    )
+    }
+
+
+  const Draw=()=>{
+    return(
+    <Drawer
+      title="App Drawer"
+      placement="left"
+      closable={false}
+      onClose={onClose}
+      visible={visible}
+      
+    >
+    
+   <Drawerlist title="Create College" onClick={()=>{props.history.push("/createcollege")}} />
+   <br/>
+   <Drawerlist title="Search College" onClick={()=>{props.history.push("/searchcollege")}}/>
+    
+    </Drawer>)
+  }
+
+
+  // main return
   return (
     <div className="App">
  <div>
-    <div style={{display:"flex",margin:10}}>
-    <button onClick={open} 
-    className="btn"
-     style={{background:"none",border:"none",outline:"none"}}
-     ><img src="https://img.icons8.com/cotton/2x/menu.png" style={{width:"30pt",margin:"10pt"}}/></button>
-     <h1 style={{margin:"10pt",opacity:0.9}}>DashBoard</h1>
-    </div>
- <Drawer
-          title="App Drawer"
-          placement="left"
-          closable={false}
-          onClose={onClose}
-          visible={visible}
-          
-        >
-        <a onClick={()=>{props.history.push("/createcollege")}}> Create College</a>
-        </Drawer>
+<Header/>
+<Draw/>
  </div>
  <div style={{display:"flex",justifyContent:"center",height:"300pt"}}>
  <StateChart Frequency={Frequency}/>

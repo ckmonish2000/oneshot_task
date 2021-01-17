@@ -1,0 +1,1 @@
+export let root={margin:"10pt auto",width:"500pt"}
