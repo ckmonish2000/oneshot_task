@@ -78,7 +78,12 @@ function App(props) {
     
    <Drawerlist title="Create College" onClick={()=>{props.history.push("/createcollege")}} />
    <br/>
-   <Drawerlist title="Search College" onClick={()=>{props.history.push("/searchcollege")}}/>
+   <Drawerlist title="Search College" onClick={()=>{props.history.push({
+     pathname:"/searchcollege",
+     state:{
+       mainData:data
+     }
+   })}}/>
     
     </Drawer>)
   }

@@ -34,18 +34,12 @@ router.get("/",(req,res)=>{
 })
 
 
-router.get("/getByname",(req,res)=>{
+router.post("/getByname",(req,res)=>{
+    console.log(req.body.collegeName)
     let dta={}
     CollegeModel.find({name:req.body.collegeName})
-    .then(data=>{
-        dta["main"]=data
-        // gets similar college
-        CollegeModel.find({city:data[0].city,courses:data[0].courses,name:{$ne:req.body.collegeName}})
-        .then(val=>{
-            dta["similar"]=val;
-            res.status(200).json(dta)
-        })
-        
+    .then(data=>{      
+        res.status(200).json(data)
     })
     .catch(err=>res.json(err))
     
