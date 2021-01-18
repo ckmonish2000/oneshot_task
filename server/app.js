@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({extended:true}))
 // routes
 app.use("/college",College)
 app.use("/student",Student)
-
+app.get("/",(req,res)=>{res.send("welcome to odin Revolution")})
 
 
 // db connection

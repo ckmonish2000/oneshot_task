@@ -17,7 +17,7 @@ router.post("/createcollege",(req,res)=>{
         state:body.state.toLowerCase(),
         country:body.country.toLowerCase(),
         No_Of_Students:body.No_Of_Students,
-        courses:body.courses
+        courses:body.courses.toLowerCase().split(",")
     })
 
     create.save()

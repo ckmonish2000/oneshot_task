@@ -5,6 +5,7 @@ import { Doughnut,Bar,Line } from 'react-chartjs-2';
 import StateChart from './charts/StateChart';
 import CoursesChart from './charts/CoursesChart';
 import { Drawer} from "antd"
+import {dburl} from"./dburl"
 import "./btn.css"
 import "../App.css"
 function App(props) {
@@ -16,7 +17,7 @@ function App(props) {
   
   useEffect(() => {
     //    fetching all the data
-    fetch("http://localhost:5000/college")
+    fetch(`${dburl}/college`)
     .then(data=>data.json())
     .then(data=>{
       setdata(data)
@@ -34,7 +35,7 @@ function App(props) {
     setFrequency(res)
     setCourses(res2)
     })
-    .catch(err=>console.log(err))
+    .catch(err=>props.history.push("/error"))
  
   }, [])
 
@@ -96,10 +97,10 @@ function App(props) {
 <Header/>
 <Draw/>
  </div>
- <div style={{display:"flex",justifyContent:"center",height:"300pt"}}>
+ {data.length>0 && <div style={{display:"flex",justifyContent:"center",height:"300pt"}}>
  <StateChart Frequency={Frequency}/>
  <CoursesChart Courses={Courses}/>
- </div>
+ </div>}
  
   <CollegeTable data={data}/>
   
