@@ -14,7 +14,7 @@ router.post("/createcollege",(req,res)=>{
         name:body.college_name.toLowerCase(),
         yearFounded:body.date,
         city:body.city.toLowerCase(),
-        state:body.state.toLowerCase(),
+        state:body.state.toLowerCase().replace(/\s/g, ''),
         country:body.country.toLowerCase(),
         No_Of_Students:body.No_Of_Students,
         courses:body.courses.toLowerCase().split(",")

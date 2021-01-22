@@ -10,7 +10,7 @@ import "./btn.css"
 import "../App.css"
 function App(props) {
   const [data, setdata] = useState([])
-
+  const [FilterState, setFilterState] = useState("")
   const [Frequency, setFrequency] = useState({})
   const [Courses, setCourses] = useState({})
   
@@ -38,6 +38,10 @@ function App(props) {
     .catch(err=>props.history.push("/error"))
  
   }, [])
+
+
+
+  const SetState=(val)=>{setFilterState(val)}
 
   // states and handlers
   const [visible, setvisible] = useState(false)
@@ -98,11 +102,11 @@ function App(props) {
 <Draw/>
  </div>
  {data.length>0 && <div style={{display:"flex",justifyContent:"center",height:"300pt"}}>
- <StateChart Frequency={Frequency}/>
+ <StateChart Frequency={Frequency} setState={setFilterState}/>
  <CoursesChart Courses={Courses}/>
  </div>}
  
-  <CollegeTable data={data}/>
+  <CollegeTable data={data} State={FilterState} Reset={()=>setFilterState("")}/>
   
     </div>
   );

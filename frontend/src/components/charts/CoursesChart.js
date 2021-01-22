@@ -23,7 +23,13 @@ export default function StateChart(props) {
                  'rgba(255, 159, 64, 0.2)'
              ]}]
          }}
-         options={{ maintainAspectRatio: false }}
+         options={{ maintainAspectRatio: false,
+          scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }}]}
+        }}
          />
        </div>
     )

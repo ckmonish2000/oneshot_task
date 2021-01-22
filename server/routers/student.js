@@ -12,7 +12,7 @@ router.post("/createstudent",(req,res)=>{
         name:body.name,
         batchYear:body.batchYear,
         college_id:body.college_id,
-        skills:body.skills
+        skills:body.skills.toLowerCase().split(",")
         })
     create.save()
     .then(data=>{res.status(200).json(data)})
@@ -26,6 +26,12 @@ router.get("/",(req,res)=>{
     .catch(err=>res.status(200).json(err))
 })
 
+
+router.get("/:id",(req,res)=>{
+    StudentModel.find({college_id:req.params.id})
+     .then(data=>res.status(200).json(data))
+     .catch(err=>res.status(200).json(err))
+ })
 
 
 
